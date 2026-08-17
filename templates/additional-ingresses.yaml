@@ -1,0 +1,23 @@
+{{- if and (.Values.ingress.enabled) (.Values.additionalDomains) -}}
+  {{- range $index, $additionalDomain := (splitList "," .Values.additionalDomains) }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "dextinity-site.fullname" $ }}-additional-{{ $index }}
+  labels:
+    {{- include "dextinity-site.labels" $ | nindent 4 }}
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt"
+    nginx.ingress.kubernetes.io/permanent-redirect: "https://{{ $.Values.domain }}$request_uri"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "{{ $additionalDomain }}"
+  tls:
+  - hosts:
+    - "{{ $additionalDomain }}"
+    secretName: {{ include "dextinity-site.fullname" $ }}-additional-{{ $index }}-cert
+  {{- end -}}
+{{- end -}}
+ 
