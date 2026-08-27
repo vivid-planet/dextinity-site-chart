@@ -71,11 +71,9 @@ builder:
   additionalPodLabels: {}
 
   kubectlVersion: "1.21.14"
-  podSecurityContext:
-    {}
+  podSecurityContext: {}
     # fsGroup: 2000
-  securityContext:
-    {}
+  securityContext: {}
     # capabilities:
     #   drop:
     #   - ALL
