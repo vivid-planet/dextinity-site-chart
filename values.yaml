@@ -60,6 +60,17 @@ initContainer:
       cpu: 50m
       memory: 512Mi
 
+copyAssets:
+  enabled: false
+  command: ""
+  resources:
+    limits:
+      memory: 128Mi
+      cpu: 2
+    requests:
+      cpu: 50m
+      memory: 128Mi
+
 builder:
   enabled: false
   instanceNameOverride: ""
